@@ -1,0 +1,37 @@
+{
+    "name": "postyou/contao-webp-bundle",
+    "type": "contao-bundle",
+    "description": "Replace images with WebP format if the browser supports it",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Mario Gienapp",
+            "homepage": "https://github.com/postyou"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "contao/core-bundle": "~4.4"
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "extra": {
+        "contao-manager-plugin": "Postyou\\ContaoWebPBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Postyou\\ContaoWebPBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Postyou\\ContaoWebPBundle\\Tests\\": "tests/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/postyou/contao-webp-bundle/issues",
+        "source": "https://github.com/postyou/contao-webp-bundle"
+    }
+}
