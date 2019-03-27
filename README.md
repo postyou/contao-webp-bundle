@@ -1,44 +1,22 @@
-# Contao 4 WebP bundle
+# Contao 4 WebP Bundle
 
-This Bundle replaces images with the webp Format.
+Contao 4 Bundle to automatically replace jpg images with the webp Format, if the browser supports it.
 
-## Install
 
-Download the skeleton bundle:
+## Requirements
 
-```bash
-wget https://github.com/contao/skeleton-bundle/archive/master.zip
-unzip master.zip
-mv skeleton-bundle-master [package name]
-cd [package name]
-```
+For webp conversion your webserver must support one of the following libraries/methods:
 
-## Customize
+ * `cwebp`
+ * `gd`
+ * `imagick`
+ * `gmagick`
+ 
+ If none of the libraries is available the image is returned in jpg format.
 
-First adjust the following files:
+## Usage
 
- * `.php_cs.php`
- * `composer.json`
- * `phpunit.xml.dist`
- * `README.md`
+All image and text contentelements contain an additional "Use WebP Format" checkbox.
+If the checkbox is selected, the image will be converted.
 
-Then rename the following files and/or the references to `SkeletonBundle` in
-the following files:
 
- * `src/ContaoManager/Plugin.php`
- * `src/DependencyInjection/ContaoSkeletonExtension.php`
- * `src/ContaoSkeletonBundle.php`
- * `tests/ContaoSkeletonBundleTest.php`
-
-Finally add your custom classes and resources.
-
-## Release
-
-Run the PHP-CS-Fixer and the unit test before you release your bundle:
-
-```bash
-vendor/bin/php-cs-fixer fix -v
-vendor/bin/phpunit
-```
-
-[1]: https://contao.org
