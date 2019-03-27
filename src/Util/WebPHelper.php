@@ -10,6 +10,7 @@ namespace Postyou\ContaoWebPBundle\Util;
 
 use Contao\Environment;
 use Symfony\Component\Filesystem\Filesystem;
+use WebPConvert\WebPConvert;
 
 class WebPHelper
 {
@@ -45,14 +46,12 @@ class WebPHelper
 
             if (!$filesystem->exists($newPath)) {
 
-                $image = imagecreatefromjpeg($src);
-
-                $created = imagewebp($image, $newPath);
+                $created = WebPConvert::convert($src, $newPath);
 
                 if ($created) {
                     return $newPath;
                 } else {
-                    return false;
+                    return $src;
                 }
             }
 
@@ -62,13 +61,7 @@ class WebPHelper
 
 
     public static function hasWebPSupport() {
-
-        $ua = Environment::get('agent');
-
-        return ($ua->browser == 'firefox' && $ua->version >= 65)
-            || ($ua->browser == 'chrome' && $ua->version >= 32)
-            || ($ua->browser == 'edge' && $ua->version >= 18);
-
+        return (strpos($_SERVER['HTTP_ACCEPT'], 'image/webp') !== false);
     }
 
 
