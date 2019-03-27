@@ -12,6 +12,6 @@ namespace Postyou\ContaoWebPBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ContaoWebPBundle extends Bundle
+class PostyouContaoWebPBundle extends Bundle
 {
 }
