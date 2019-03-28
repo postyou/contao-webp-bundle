@@ -18,9 +18,6 @@ class WebPContentText extends \ContentText {
 
                 $picture = WebPHelper::getWebPPicture($this->Template->picture);
                 $this->Template->picture = $picture;
-                if (!empty($this->Template->href)) {
-                    $this->Template->href = $picture['img']['src'];
-                }
             }
         }
 

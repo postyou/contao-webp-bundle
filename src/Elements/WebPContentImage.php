@@ -13,10 +13,6 @@ class WebPContentImage extends \ContentImage {
         if (\Config::get('useWebP') && WebPHelper::hasWebPSupport()) {
             $picture = WebPHelper::getWebPPicture($this->Template->picture);
             $this->Template->picture = $picture;
-            if (!empty($this->Template->href)) {
-                $this->Template->href = $picture['img']['src'];
-            }
-
         }
     }
 

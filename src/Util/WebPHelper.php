@@ -57,6 +57,8 @@ class WebPHelper
 
             return $newPath;
         }
+
+        return $src;
     }
 
 
