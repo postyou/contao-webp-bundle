@@ -13,7 +13,9 @@ class WebPContentText extends \ContentText {
 
         if ($this->addImage && $this->singleSRC != '')
         {
-            if ($this->useWebP && WebPHelper::hasWebPSupport()) {
+
+            if (\Config::get('useWebP') && WebPHelper::hasWebPSupport()) {
+
                 $picture = WebPHelper::getWebPPicture($this->Template->picture);
                 $this->Template->picture = $picture;
                 if (!empty($this->Template->href)) {

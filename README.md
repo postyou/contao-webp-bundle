@@ -16,7 +16,7 @@ For webp conversion your webserver must support one of the following libraries/m
 
 ## Usage
 
-All image and text contentelements contain an additional "Use WebP Format" checkbox.
-If the checkbox is selected, the image will be converted.
+In the conto system settings a "Use WebP Format" checkbox is added.
+If the checkbox is selected, all images of image and text content elements will be converted.
 
 
