@@ -40,7 +40,7 @@ class WebPHelper
     }
 
     public static function getWebPImage($src) {
-        if (strpos($src,'.jpg') !== false || strpos($src,'.jpeg') !== false) {
+        if (strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false) {
             $filesystem = new FileSystem();
             $newPath = substr($src, 0, strrpos($src, '.')).'.webp';
 
