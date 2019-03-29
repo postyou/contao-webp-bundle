@@ -31,8 +31,15 @@ class WebPHelper
         $srcsets = explode(", ",$srcsetStr);
 
         foreach ($srcsets as $key => $srcset) {
-            $src = substr($srcset,0, strpos($srcset, " "));
-            $factor = substr($srcset, strpos($srcset, " "));
+            $length = strpos($srcset, " ");
+            if($length > 0) {
+                $src = substr($srcset,0, strpos($srcset, " "));
+                $factor = substr($srcset, strpos($srcset, " "));
+            } else {
+                $src = $srcset;
+                $factor = '';
+            }
+
             $srcsets[$key] = self::getWebPImage($src).$factor;
         }
 
