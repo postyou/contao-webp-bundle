@@ -2,6 +2,7 @@
     "name": "postyou/contao-webp-bundle",
     "type": "contao-bundle",
     "description": "Replace images with WebP format if the browser supports it",
+    "keywords":["contao", "webp", "google", "pagespeed", "performance"],
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
