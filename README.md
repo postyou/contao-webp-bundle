@@ -1,3 +1,4 @@
+[![](https://img.shields.io/maintenance/yes/2019.svg)](https://github.com/postyou/contao-webp-bundle)
 # Contao 4 WebP Bundle
 
 Contao 4 Bundle to automatically replace jpg images with the webp Format, if the browser supports it.
