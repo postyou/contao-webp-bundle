@@ -60,8 +60,13 @@ class WebPHelper
 
             if (!$filesystem->exists($newPath)) {
 
+                $options = [];
+                if (!empty(\Config::get('webPQuality'))) {
+                    $options['quality'] = \Config::get('webPQuality');
+                }
+
                 try {
-                    WebPConvert::convert($src, $newPath);
+                    WebPConvert::convert($src, $newPath, $options);
                     return $newPath;
                 } catch (ConversionFailedException $e) {
                     return $src;
