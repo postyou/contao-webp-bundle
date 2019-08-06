@@ -11,6 +11,7 @@ namespace Postyou\ContaoWebPBundle\Util;
 use Contao\Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use WebPConvert\Convert\Exceptions\ConversionFailedException;
+use WebPConvert\Exceptions\InvalidInput\TargetNotFoundException;
 use WebPConvert\WebPConvert;
 
 class WebPHelper
@@ -58,16 +59,18 @@ class WebPHelper
 
             $newPath = substr($src, 0, strrpos($src, '.')).'.webp';
 
-            if (!$filesystem->exists($newPath)) {
+            if (!$filesystem->exists($newPath) || \Config::get('webPQualityChanged')) {
 
                 $options = [];
                 if (!empty(\Config::get('webPQuality'))) {
                     $options['quality'] = \Config::get('webPQuality');
+                    \Config::persist('webPQualityChanged', false);
                 }
 
                 try {
                     WebPConvert::convert($src, $newPath, $options);
                     return $newPath;
+
                 } catch (ConversionFailedException $e) {
                     return $src;
                 }

@@ -17,14 +17,17 @@ $arrFields = [
         'exclude'   => true,
         'eval'      => array('tl_class' => 'clr w50'),
         'inputType' => 'checkbox',
-        'sql'       => "char(1) NOT NULL default ''",
     ],
     'webPQuality' => [
         'label'     => &$GLOBALS['TL_LANG']['tl_settings']['webPQuality'],
         'exclude'   => true,
         'eval'      => array('tl_class' => 'w50', "rgxp" => "natural"),
         'inputType' => 'text',
-        'sql'       => "varchar(255) NOT NULL default ''",
+        'save_callback' => array(function($val, $dc) {\Config::persist('webPQualityChanged',true); return $val;}),
+
+    ],
+    'webPQualityChanged' => [
+        'exclude'   => true,
     ]
 ];
 
