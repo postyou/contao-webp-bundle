@@ -10,6 +10,7 @@ namespace Postyou\ContaoWebPBundle\Util;
 
 use Contao\Environment;
 use Symfony\Component\Filesystem\Filesystem;
+use WebPConvert\Convert\Exceptions\ConversionFailedException;
 use WebPConvert\WebPConvert;
 
 class WebPHelper
@@ -49,17 +50,23 @@ class WebPHelper
     public static function getWebPImage($src) {
         if (strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false) {
             $filesystem = new FileSystem();
+
+            //check if encoded
+            if (preg_match('~%[0-9A-F]{2}~i', $src)) {
+                $src = rawurldecode($src);
+            }
+
             $newPath = substr($src, 0, strrpos($src, '.')).'.webp';
 
             if (!$filesystem->exists($newPath)) {
 
-                $created = WebPConvert::convert($src, $newPath);
-
-                if ($created) {
+                try {
+                    WebPConvert::convert($src, $newPath);
                     return $newPath;
-                } else {
+                } catch (ConversionFailedException $e) {
                     return $src;
                 }
+
             }
 
             return $newPath;
