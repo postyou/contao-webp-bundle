@@ -12,7 +12,6 @@ use Contao\Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use WebPConvert\Convert\Exceptions\ConversionFailedException;
 use WebPConvert\Exceptions\InvalidInput\TargetNotFoundException;
-use WebPConvert\Loggers\EchoLogger;
 use WebPConvert\WebPConvert;
 
 class WebPHelper
@@ -59,7 +58,6 @@ class WebPHelper
             }
 
             $newPath = substr($src, 0, strrpos($src, '.')).'.webp';
-//            dump($newPath);
 
             if (!$filesystem->exists($newPath) || \Config::get('webPQualityChanged')) {
 
@@ -70,7 +68,7 @@ class WebPHelper
                 }
 
                 try {
-                    WebPConvert::convert($src, $newPath, $options, new EchoLogger());
+                    WebPConvert::convert($src, $newPath, $options);
                     return $newPath;
 
                 } catch (ConversionFailedException $e) {
