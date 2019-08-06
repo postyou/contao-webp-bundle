@@ -11,6 +11,8 @@ namespace Postyou\ContaoWebPBundle\Util;
 use Contao\Environment;
 use Symfony\Component\Filesystem\Filesystem;
 use WebPConvert\Convert\Exceptions\ConversionFailedException;
+use WebPConvert\Exceptions\InvalidInput\TargetNotFoundException;
+use WebPConvert\Loggers\EchoLogger;
 use WebPConvert\WebPConvert;
 
 class WebPHelper
@@ -48,7 +50,7 @@ class WebPHelper
     }
 
     public static function getWebPImage($src) {
-        if (strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false) {
+        if ( strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false || !\Config::get('disablePngConversion') ? (strpos(strtolower($src),'.png') !== false) : false) {
             $filesystem = new FileSystem();
 
             //check if encoded
@@ -57,18 +59,24 @@ class WebPHelper
             }
 
             $newPath = substr($src, 0, strrpos($src, '.')).'.webp';
+//            dump($newPath);
 
-            if (!$filesystem->exists($newPath)) {
+            if (!$filesystem->exists($newPath) || \Config::get('webPQualityChanged')) {
 
                 $options = [];
                 if (!empty(\Config::get('webPQuality'))) {
                     $options['quality'] = \Config::get('webPQuality');
+                    \Config::persist('webPQualityChanged', false);
                 }
 
                 try {
-                    WebPConvert::convert($src, $newPath, $options);
+                    WebPConvert::convert($src, $newPath, $options, new EchoLogger());
                     return $newPath;
+
                 } catch (ConversionFailedException $e) {
+                    return $src;
+
+                } catch (TargetNotFoundException $e) {
                     return $src;
                 }
 
