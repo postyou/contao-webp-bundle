@@ -49,7 +49,7 @@ class WebPHelper
     }
 
     public static function getWebPImage($src) {
-        if ( strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false || !\Config::get('disablePngConversion') ? (strpos(strtolower($src),'.png') !== false) : false) {
+        if ( strpos(strtolower($src),'.jpg') !== false || strpos(strtolower($src),'.jpeg') !== false || (!\Config::get('disablePngConversion') ? (strpos(strtolower($src),'.png') !== false) : false)) {
             $filesystem = new FileSystem();
 
             //check if encoded
